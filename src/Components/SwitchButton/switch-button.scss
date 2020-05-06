@@ -1,0 +1,10 @@
+.lang-select {
+  position: fixed;
+  right: 5%;
+  top: 10%;
+  @include center;
+}
+.direction-select {
+  @include center;
+  margin-bottom: 20px;
+}

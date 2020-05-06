@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
-function App() {
+import { Header } from './Components/Header/Header';
+import { Forecast } from './Components/Forecast/Forecast';
+import { History } from './Components/History/History';
+import { SelectLang } from './Components/SwitchButton/SelectLang';
+
+const App: React.FC = () => {
+  const setDefaulLanguage = () => {
+    const userBrowserLang = navigator.language.split('-')[0];
+
+    return userBrowserLang !== 'ru' && userBrowserLang !== 'en' ? 'ru' : userBrowserLang;
+  };
+
+  const [state, setState] = useState<string>(setDefaulLanguage());
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <Header lang={state} />
+      <SelectLang lang={state} chooseLang={setState} />
+      <Switch>
+        <Route path='/forecast' render={() => <Forecast lang={state} />} />
+        <Route path='/history' render={() => <History lang={state}/>} />
+        <Redirect to='/forecast' />
+      </Switch>
     </div>
   );
-}
+};
 
 export default App;

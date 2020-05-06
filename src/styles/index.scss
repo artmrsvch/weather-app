@@ -1,0 +1,9 @@
+//settings
+@import './settigs/media.scss';
+@import './settigs/mixins.scss';
+@import './settigs/layout.scss';
+
+//Components
+@import '../Components/Forecast/forecast.scss';
+@import '../Components/History/history.scss';
+@import '../Components/SwitchButton/switch-button.scss';
